@@ -3,3 +3,9 @@ Django
 djangorestframework
 sqlparse
 tzdata
+
+langchain
+langchain-community
+groq
+python-dotenv
+langchain_groq
