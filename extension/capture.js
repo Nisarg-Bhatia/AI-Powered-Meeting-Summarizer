@@ -1,95 +1,72 @@
-let recorder;
 let audioContext;
 let destination;
 let displayStream;
 let micStream;
-
+let recorder;
 let chunks = [];
-let meetingId;
-let chunkIndex = 0;
 
 const startBtn = document.getElementById("start");
 const stopBtn = document.getElementById("stop");
 const statusText = document.getElementById("status");
-const playerDiv = document.getElementById("player");
 
-/* =======================
-   START RECORDING
-======================= */
 startBtn.onclick = async () => {
   try {
-    // 🔁 RESET STATE
-    meetingId = "meeting_" + Date.now();
-    chunkIndex = 0;
     chunks = [];
-    playerDiv.innerHTML = "";
-
     statusText.innerText = "Requesting permissions...";
 
+    // TAB AUDIO (select "This Tab" + Share tab audio)
     displayStream = await navigator.mediaDevices.getDisplayMedia({
       video: true,
       audio: true
     });
 
+    // MIC AUDIO
     micStream = await navigator.mediaDevices.getUserMedia({
       audio: true
     });
 
-    audioContext = new AudioContext();
+    audioContext = new AudioContext({ sampleRate: 48000 });
+
+    // 🔑 CRITICAL: ensure audio context is running
+    if (audioContext.state === "suspended") {
+      await audioContext.resume();
+    }
+
     destination = audioContext.createMediaStreamDestination();
 
     audioContext.createMediaStreamSource(displayStream).connect(destination);
     audioContext.createMediaStreamSource(micStream).connect(destination);
 
     recorder = new MediaRecorder(destination.stream, {
-      mimeType: "audio/webm;codecs=opus"
+      mimeType: "audio/webm;codecs=opus",
+      audioBitsPerSecond: 128000
     });
 
-    recorder.ondataavailable = async (e) => {
+    recorder.ondataavailable = (e) => {
       if (e.data && e.data.size > 0) {
         chunks.push(e.data);
-
-        const formData = new FormData();
-        formData.append("meeting_id", meetingId);
-        formData.append("chunk_index", chunkIndex);
-        formData.append("audio", e.data, `chunk_${chunkIndex}.webm`);
-
-        try {
-          await fetch("http://127.0.0.1:8000/api/upload-chunk/", {
-            method: "POST",
-            body: formData
-          });
-        } catch (err) {
-          console.error("Chunk upload failed:", err);
-        }
-
-        chunkIndex++;
       }
     };
 
-    recorder.onstop = () => {
-      // 🔒 Cleanup AFTER final chunk arrives
-      displayStream.getTracks().forEach(t => t.stop());
-      micStream.getTracks().forEach(t => t.stop());
-      audioContext.close();
-
-      // ▶️ LOCAL PLAYBACK
+    // ✅ set onstop BEFORE stop is called
+    recorder.onstop = async () => {
       const finalBlob = new Blob(chunks, { type: "audio/webm" });
-      const audioURL = URL.createObjectURL(finalBlob);
 
-      const audio = document.createElement("audio");
-      audio.controls = true;
-      audio.src = audioURL;
+      const formData = new FormData();
+      const meetingId = "meeting_" + Date.now();
 
-      playerDiv.innerHTML = "";
-      playerDiv.appendChild(audio);
+      formData.append("meeting_id", meetingId);
+      formData.append("audio", finalBlob, "meeting.webm");
 
-      startBtn.disabled = false;
-      stopBtn.disabled = true;
-      statusText.innerText = "Recording stopped";
+      await fetch("http://127.0.0.1:8000/api/upload-meeting/", {
+        method: "POST",
+        body: formData
+      });
+
+      console.log("Meeting audio uploaded:", finalBlob.size);
     };
 
-    recorder.start(10000); // chunk every 10s
+    recorder.start();
 
     startBtn.disabled = true;
     stopBtn.disabled = false;
@@ -101,19 +78,14 @@ startBtn.onclick = async () => {
   }
 };
 
-/* =======================
-   STOP RECORDING
-======================= */
-stopBtn.onclick = async () => {
-  if (!recorder || recorder.state !== "recording") return;
+stopBtn.onclick = () => {
+  recorder?.stop();
 
-  statusText.innerText = "Finalizing recording...";
+  displayStream?.getTracks().forEach(t => t.stop());
+  micStream?.getTracks().forEach(t => t.stop());
+  audioContext?.close();
 
-  // 🔑 FORCE FINAL CHUNK FLUSH
-  recorder.requestData();
-
-  // ⏱️ Small delay ensures ondataavailable fires
-  setTimeout(() => {
-    recorder.stop();
-  }, 200);
+  startBtn.disabled = false;
+  stopBtn.disabled = true;
+  statusText.innerText = "Recording stopped";
 };

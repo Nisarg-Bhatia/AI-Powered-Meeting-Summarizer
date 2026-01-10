@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import upload_chunk
+from .views import upload_meeting
 
 urlpatterns = [
-    path("upload-chunk/", upload_chunk),
+    path("upload-meeting/", upload_meeting),
 ]
