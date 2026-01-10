@@ -181,7 +181,7 @@ function AboutUs() {
 
       <section className="py-20 text-center relative z-10 border-t border-gray-700">
         <h3 className="text-2xl font-bold mb-6 text-white">Ready to upgrade your meetings?</h3>
-        <button className="relative group inline-flex items-center justify-center px-8 py-3 font-bold text-white transition-all duration-300 bg-emerald-500 hover:bg-emerald-600 rounded-md">
+        <button className="relative group inline-flex items-center justify-center px-8 py-3 font-bold text-white transition-all duration-300 bg-emerald-500 hover:bg-emerald-600 rounded-md hover:scale-105 active:scale-95 hover:shadow-xl hover:shadow-emerald-500/50">
           <span className="relative z-10">Get Started for Free</span>
         </button>
       </section>

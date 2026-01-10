@@ -1,5 +1,7 @@
-import React from 'react';
+import React from 'react'; // Removed "type" import
 
+// A reusable component for individual feature cards
+// REMOVED TypeScript annotations here ▼
 const FeatureCard = ({
   icon,
   title,
@@ -8,11 +10,14 @@ const FeatureCard = ({
 }) => {
   return (
     <div className="group relative h-full">
+      {/* Hover Glow Effect behind the card */}
       <div
         className={`absolute -inset-0.5 bg-gradient-to-r ${glowColor} rounded-3xl blur opacity-20 group-hover:opacity-60 transition duration-500 -z-10`}
       ></div>
 
+      {/* Card Content */}
       <div className="relative h-full p-8 rounded-md bg-[#262626] border border-gray-700 hover:border-emerald-500/50 transition-all overflow-hidden flex flex-col group">
+        {/* Icon Container */}
         <div
           className={`mb-6 inline-flex p-3 rounded-md bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center group-hover:border-emerald-500 transition-all`}
         >
@@ -32,6 +37,7 @@ export default function Page() {
   return (
     <section className="py-22 bg-[#1a1a1a] relative overflow-hidden z-10 min-h-screen">
       <div className="container mx-auto px-6 relative">
+        {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center mb-20">
           <h2 className="text-3xl md:text-5xl font-extrabold mb-6 tracking-tight text-white">
             Your Meeting Assistant, <br />
@@ -45,7 +51,9 @@ export default function Page() {
           </p>
         </div>
 
+        {/* Features Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+          {/* FEATURE 1: Audio Summarization - Microphone Icon */}
           <FeatureCard
             glowColor="from-emerald-500 to-emerald-600"
             title="Instant Audio Summaries"
@@ -70,6 +78,7 @@ export default function Page() {
             }
           />
 
+          {/* FEATURE 2: Smart To-Do Lists - Sparkles/AI Icon */}
           <FeatureCard
             glowColor="from-emerald-500 to-emerald-600"
             title="Smart To-Do Lists"
@@ -94,6 +103,7 @@ export default function Page() {
             }
           />
 
+          {/* FEATURE 3: Calendar Sync - Bell/Notification Icon */}
           <FeatureCard
             glowColor="from-emerald-500 to-emerald-600"
             title="Auto-Calendar Sync"

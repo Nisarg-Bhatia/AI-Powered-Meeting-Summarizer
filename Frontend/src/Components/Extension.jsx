@@ -1,6 +1,24 @@
 "use client"
 
+import { Link, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+
 function Extension() {
+  const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('authToken');
+    setIsLoggedIn(!!token);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('justLoggedIn');
+    setIsLoggedIn(false);
+    navigate('/login');
+  };
+
   return (
     <div className="min-h-screen bg-[#1a1a1a] text-white overflow-hidden relative z-0 flex flex-col">
       <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#1a1a1a] via-[#1a1a1a] to-[#1a1a1a] -z-20"></div>
@@ -18,13 +36,24 @@ function Extension() {
           </div>
 
           <div className="flex items-center space-x-4 md:space-x-8">
-            <button className="text-sm md:text-base font-medium text-gray-300 hover:text-white transition-colors duration-300">
-              Log In
-            </button>
+            {isLoggedIn ? (
+              <button 
+                onClick={handleLogout}
+                className="text-sm md:text-base font-medium text-gray-300 hover:text-white transition-all duration-300 hover:scale-110 active:scale-95"
+              >
+                Log Out
+              </button>
+            ) : (
+              <>
+                <Link to="/login" className="text-sm md:text-base font-medium text-gray-300 hover:text-white transition-all duration-300 hover:scale-110 active:scale-95">
+                  Log In
+                </Link>
 
-            <button className="relative group px-6 py-2.5 rounded-md text-sm font-semibold text-white bg-emerald-500 hover:bg-emerald-600 transition-all duration-300">
-              Sign Up Free
-            </button>
+                <Link to="/signup" className="relative group px-6 py-2.5 rounded-md text-sm font-semibold text-white bg-emerald-500 hover:bg-emerald-600 transition-all duration-300 hover:scale-105 active:scale-95 hover:shadow-lg hover:shadow-emerald-500/50">
+                  Sign Up Free
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </nav>
@@ -49,7 +78,7 @@ function Extension() {
             </p>
 
             <div className="pt-6">
-              <button className="group relative inline-flex items-center justify-center px-8 py-4 font-bold text-white transition-all duration-300 bg-emerald-500 hover:bg-emerald-600 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-[#1a1a1a]">
+              <button className="group relative inline-flex items-center justify-center px-8 py-4 font-bold text-white transition-all duration-300 bg-emerald-500 hover:bg-emerald-600 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-[#1a1a1a] hover:scale-105 active:scale-95 hover:shadow-xl hover:shadow-emerald-500/50 animate-pulse-slow">
                 <span className="tracking-wide">Add to Chrome — It's Free</span>
 
                 <svg
@@ -58,7 +87,7 @@ function Extension() {
                   height="24"
                   viewBox="0 0 24 24"
                   fill="currentColor"
-                  className="ml-3 -mr-1 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1"
+                  className="ml-3 -mr-1 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1 group-hover:scale-110"
                 >
                   <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm0 4c1.489 0 2.874.407 4.078 1.108l-2.818 4.882h-5.881l3.193-5.527c.459-.302.95-.463 1.428-.463zm-5.62 2.293l2.681 4.639-3.188 5.52c-1.192-1.415-1.909-3.252-1.909-5.254 0-1.998.716-3.835 1.907-5.246.163.122.336.233.509.341zm9.562 11.105l-2.685-4.643 3.194-5.53c1.185 1.413 1.897 3.242 1.897 5.236 0 1.993-.711 3.822-1.894 5.233-.169-.117-.346-.224-.512-.33zm-9.454-1.028l2.819-4.882h5.895l-3.206 5.556c-.456.296-.943.456-1.414.456-1.474 0-2.849-.402-4.052-1.096.002-.002-.023-.018-.042-.034zm5.512-2.37c-1.104 0-2-.896-2-2s.896-2 2-2 2 .896 2 2-.896 2-2 2z" />
                 </svg>

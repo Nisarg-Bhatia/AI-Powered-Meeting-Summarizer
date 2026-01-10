@@ -7,7 +7,7 @@ from utils.security import (
     create_access_token,
     generate_reset_token,
 )
-from utils.email import send_password_reset_email
+from utils.email import send_password_reset_email, send_welcome_email
 from fastapi import HTTPException, status
 from datetime import datetime, timedelta
 
@@ -38,6 +38,13 @@ class AuthService:
         db.add(new_user)
         db.commit()
         db.refresh(new_user)
+
+        # Send welcome email (non-blocking)
+        try:
+            send_welcome_email(new_user.email, new_user.name)
+        except Exception as e:
+            print(f"⚠️  Failed to send welcome email: {str(e)}")
+            # Don't fail registration if email fails
 
         access_token = create_access_token(data={"sub": str(new_user.id)})
 
@@ -105,6 +112,13 @@ class AuthService:
             db.add(user)
             db.commit()
             db.refresh(user)
+            
+            # Send welcome email for new Google users
+            try:
+                send_welcome_email(user.email, user.name)
+            except Exception as e:
+                print(f"⚠️  Failed to send welcome email: {str(e)}")
+                # Don't fail registration if email fails
 
         return user
 
