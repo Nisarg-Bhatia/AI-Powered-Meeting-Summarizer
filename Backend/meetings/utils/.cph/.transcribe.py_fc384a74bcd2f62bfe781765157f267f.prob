@@ -1,0 +1,1 @@
+{"name":"Local: transcribe","url":"c:\\Users\\DIYA\\Desktop\\AI-Powered-Meeting-Summarizer\\Backend\\meetings\\utils\\transcribe.py","tests":[{"id":1768046866665,"input":"","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\DIYA\\Desktop\\AI-Powered-Meeting-Summarizer\\Backend\\meetings\\utils\\transcribe.py","group":"local","local":true}

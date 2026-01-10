@@ -53,7 +53,7 @@ startBtn.onclick = async () => {
       const finalBlob = new Blob(chunks, { type: "audio/webm" });
 
       const formData = new FormData();
-      const meetingId = "meeting_" + Date.now();
+      const meetingId = crypto.randomUUID();
 
       formData.append("meeting_id", meetingId);
       formData.append("audio", finalBlob, "meeting.webm");
@@ -62,7 +62,11 @@ startBtn.onclick = async () => {
         method: "POST",
         body: formData
       });
-
+      
+      await fetch("http://127.0.0.1:8000/api/transcribe-meeting/", {
+        method: "POST",
+        body: new URLSearchParams({ meeting_id: meetingId })
+      });
       console.log("Meeting audio uploaded:", finalBlob.size);
     };
 
