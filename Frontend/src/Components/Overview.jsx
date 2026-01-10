@@ -5,9 +5,10 @@ const FeatureCard = ({
   title,
   description,
   glowColor,
+  delay = 200,
 }) => {
   return (
-    <div className="group relative h-full">
+    <div className="group relative h-full" data-aos="fade-up" data-aos-delay={delay}>
       <div
         className={`absolute -inset-0.5 bg-gradient-to-r ${glowColor} rounded-3xl blur opacity-20 group-hover:opacity-60 transition duration-500 -z-10`}
       ></div>
@@ -32,14 +33,14 @@ export default function Page() {
   return (
     <section className="py-22 bg-[#1a1a1a] relative overflow-hidden z-10 min-h-screen">
       <div className="container mx-auto px-6 relative">
-        <div className="max-w-3xl mx-auto text-center mb-20">
+        <div className="max-w-3xl mx-auto text-center mb-20" data-aos="fade-up">
           <h2 className="text-3xl md:text-5xl font-extrabold mb-6 tracking-tight text-white">
             Your Meeting Assistant, <br />
             <span className="text-emerald-400">
               Automated.
             </span>
           </h2>
-          <p className="text-lg text-gray-400 leading-relaxed font-light">
+          <p className="text-lg text-gray-400 leading-relaxed font-light" data-aos="fade-up" data-aos-delay="100">
             Our extension quietly works in the background of your Google Meets, processing audio in real-time to deliver
             structured intelligence the moment the call ends.
           </p>
@@ -50,6 +51,7 @@ export default function Page() {
             glowColor="from-emerald-500 to-emerald-600"
             title="Instant Audio Summaries"
             description="Stop trying to write down everything. We capture the full audio context and generate concise, accurate summaries highlighting the most important topics discussed."
+            delay={200}
             icon={
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -74,8 +76,9 @@ export default function Page() {
             glowColor="from-emerald-500 to-emerald-600"
             title="Smart To-Do Lists"
             description="Never miss a follow-up. The AI identifies commitments and action items assigned to participants, automatically generating a checklist ready for your task manager."
+            delay={300}
             icon={
-              <svg
+              < svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="32"
                 height="32"
@@ -98,8 +101,9 @@ export default function Page() {
             glowColor="from-emerald-500 to-emerald-600"
             title="Auto-Calendar Sync"
             description="Did someone say 'Let's meet next Tuesday at 2 PM'? The extension detects dates and times spoken in the meeting and automatically drafts Google Calendar invites."
+            delay={400}
             icon={
-              <svg
+              < svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="32"
                 height="32"

@@ -6,7 +6,7 @@ const glowColor = (gradient) => {
 
 const ValueCard = ({ icon, title, description, gradient }) => {
   return (
-    <div className="group relative p-[1px] rounded-md bg-gradient-to-br from-emerald-500/10 to-emerald-500/5 overflow-hidden">
+    <div className="group relative p-[1px] rounded-md bg-gradient-to-br from-emerald-500/10 to-emerald-500/5 overflow-hidden" data-aos="fade-up" data-aos-delay="200">
       <div
         className={`absolute inset-0 bg-gradient-to-r ${gradient} opacity-0 group-hover:opacity-20 transition-opacity duration-500 blur-xl`}
       ></div>
@@ -29,16 +29,16 @@ function AboutUs() {
   return (
     <div className="bg-[#1a1a1a] text-white overflow-hidden relative">
       <section className="pt-32 pb-20 container mx-auto px-6 text-center relative z-10">
-        <span className="inline-block py-1 px-4 rounded-md bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-sm font-semibold tracking-wider uppercase mb-6">
+        <span className="inline-block py-1 px-4 rounded-md bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-sm font-semibold tracking-wider uppercase mb-6" data-aos="fade-up">
           About MeetSmart AI
         </span>
-        <h1 className="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight mb-8 text-white">
+        <h1 className="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight mb-8 text-white" data-aos="fade-up" data-aos-delay="100">
           We're Reclaiming Your <br />
           <span className="text-emerald-400">
             Time to Think.
           </span>
         </h1>
-        <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed font-light">
+        <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed font-light" data-aos="fade-up" data-aos-delay="200">
           We believe human connection is vital, but the administrative overhead of meetings is broken. We use AI to
           handle the busywork so you can focus on the big ideas.
         </p>
@@ -46,7 +46,7 @@ function AboutUs() {
 
       <section className="py-20 container mx-auto px-6 relative z-10">
         <div className="flex flex-col md:flex-row items-center gap-16">
-          <div className="w-full md:w-1/2 relative">
+          <div className="w-full md:w-1/2 relative" data-aos="fade-right">
             <div className="aspect-square relative rounded-md overflow-hidden border border-gray-700 bg-[#262626]">
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-emerald-500/10 rounded-full blur-[100px] opacity-40 animate-pulse"></div>
               <svg
@@ -75,7 +75,7 @@ function AboutUs() {
             </div>
           </div>
 
-          <div className="w-full md:w-1/2 space-y-6">
+          <div className="w-full md:w-1/2 space-y-6" data-aos="fade-left">
             <h2 className="text-3xl font-bold mb-4 text-white">The Story Defining Our Mission</h2>
             <div className="space-y-6 text-gray-400 leading-relaxed">
               <p>
@@ -98,9 +98,9 @@ function AboutUs() {
       </section>
 
       <section className="py-24 container mx-auto px-6 relative z-10">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16" data-aos="fade-up">
           <h2 className="text-3xl font-bold text-white">Our Core Principles</h2>
-          <p className="text-gray-400 mt-4">The pillars guiding how we build AI for your workflow.</p>
+          <p className="text-gray-400 mt-4" data-aos="fade-up" data-aos-delay="100">The pillars guiding how we build AI for your workflow.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

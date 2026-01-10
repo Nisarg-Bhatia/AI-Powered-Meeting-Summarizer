@@ -73,82 +73,11 @@ function Extension() {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 md:w-96 md:h-96 bg-emerald-500/5 rounded-full blur-[80px] md:blur-[120px] -z-10"></div>
 
             <div className="relative z-10 animate-float-slow">
-              <svg width="300" height="300" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M160 40H240C251.046 40 260 48.9543 260 60V240C260 251.046 251.046 260 240 260H160"
-                  stroke="url(#paint_notes)"
-                  strokeWidth="12"
-                  strokeLinecap="round"
-                />
-                <line
-                  x1="180"
-                  y1="100"
-                  x2="230"
-                  y2="100"
-                  stroke="url(#paint_notes)"
-                  strokeWidth="8"
-                  strokeLinecap="round"
-                />
-                <line
-                  x1="180"
-                  y1="140"
-                  x2="230"
-                  y2="140"
-                  stroke="url(#paint_notes)"
-                  strokeWidth="8"
-                  strokeLinecap="round"
-                />
-                <line
-                  x1="180"
-                  y1="180"
-                  x2="230"
-                  y2="180"
-                  stroke="url(#paint_notes)"
-                  strokeWidth="8"
-                  strokeLinecap="round"
-                />
-
-                <rect
-                  x="40"
-                  y="80"
-                  width="160"
-                  height="140"
-                  rx="20"
-                  fill="url(#paint_camera_bg)"
-                  stroke="url(#paint_camera_stroke)"
-                  strokeWidth="4"
-                />
-                <path
-                  d="M140 150L180 120V180L140 150Z"
-                  fill="#000000"
-                  stroke="url(#paint_camera_stroke)"
-                  strokeWidth="4"
-                  strokeLinejoin="round"
-                />
-                <circle cx="100" cy="150" r="25" stroke="url(#paint_camera_stroke)" strokeWidth="4" />
-
-                <defs>
-                  <linearGradient id="paint_notes" x1="160" y1="40" x2="260" y2="260" gradientUnits="userSpaceOnUse">
-                    <stop stopColor="#10b981" />
-                    <stop offset="1" stopColor="#059669" />
-                  </linearGradient>
-                  <linearGradient id="paint_camera_bg" x1="40" y1="80" x2="200" y2="220" gradientUnits="userSpaceOnUse">
-                    <stop stopColor="#10b981" stopOpacity="0.15" />
-                    <stop offset="1" stopColor="#10b981" stopOpacity="0.05" />
-                  </linearGradient>
-                  <linearGradient
-                    id="paint_camera_stroke"
-                    x1="40"
-                    y1="80"
-                    x2="200"
-                    y2="220"
-                    gradientUnits="userSpaceOnUse"
-                  >
-                    <stop stopColor="#10b981" />
-                    <stop offset="1" stopColor="#059669" />
-                  </linearGradient>
-                </defs>
-              </svg>
+              <img
+                src="/wmremove-transformed-removebg-preview.png"
+                alt="MeetSmartAI Logo"
+                className="w-70 h-70 md:w-100 md:h-100 object-contain"
+              />
             </div>
           </div>
         </div>
