@@ -5,7 +5,8 @@
   "description": "AI-powered meeting recorder",
 
   "permissions": [
-    "storage"
+    "storage",
+    "tabs"
   ],
 
   "host_permissions": [
